@@ -68,7 +68,26 @@ func TestStripCStyleComments_lineComments(t *testing.T) {
 		{
 			"text \"line1 //\\\nline // 2\\\nline 3//comment\nnext\"line//com",
 			"text \"line1 //\\\nline // 2\\\nline 3//comment\nnext\"line//com"},
-
+		// comments cannot be escaped
+		{
+			`text \// text`,
+			`text \`},
+		{
+			"text // text\\\ntext",
+			"text \ntext"},
+		{
+			`text \/* text */`,
+			`text \`},
+		{
+			`text /* text \*/ text2 */`,
+			`text  text2 */`},
+		// escapes before comment-similar strings work as usual
+		{
+			`text \/text`,
+			`text \/text`},
+		{
+			`text \/"text//text"`,
+			`text \/"text//text"`},
 		// escaped quotes
 		{
 			`text \"txt // text`,
