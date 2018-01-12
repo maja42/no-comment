@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	nocomment "github.com/maja42/no-comment"
+	"github.com/maja42/no-comment"
 )
 
 func main() {
@@ -19,7 +19,9 @@ func main() {
 
 	fmt.Println(out)
 	// Prints:
-	// 	Reservoir Dogs
-	// 	Airplane!
-
+	// 		Line comment
+	// 		Block  comment
+	// 		"Quoted /*text*/ \" stays 'til the end! \\"  really!
+	// 		"And quoted text \
+	// 		//can also span multiple lines!"
 }

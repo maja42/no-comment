@@ -47,3 +47,47 @@ Although different comment styles have different properties, many share the same
 
 The above rules are some common examples that can be encountered and which are correctly treated by the library.
 Additional special cases might apply for certain  dialects.
+
+
+## Usage
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/maja42/no-comment"
+)
+
+func main() {
+	input := `
+	Line comment //gets stripped away!
+	Block /*gets stripped away!*/ comment
+	"Quoted /*text*/ \" stays 'til the end! \\" /* comments don't \*/ really!
+	"And quoted text \
+	//can also span multiple lines!"
+	`
+
+	out := nocomment.StripCStyleComments(input)
+	fmt.Println(out)
+	// Prints:
+	// 		Line comment
+	// 		Block  comment
+	// 		"Quoted /*text*/ \" stays 'til the end! \\"  really!
+	// 		"And quoted text \
+	// 		//can also span multiple lines!"
+}
+```
+
+## Installation
+
+`go get github.com/maja42/no-comment`
+
+## Demo
+
+The _example folder contains a small example for stripping c-style comments.
+
+```
+cd _example/
+go run main.go
+```
